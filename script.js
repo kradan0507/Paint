@@ -1,15 +1,27 @@
 let cnv = document.getElementById("canvas");
 let ctx = cnv.getContext("2d");
 let color = "black";
+let background = document.getElementById("background");
 let width = 30;
 
 let displayWidth = cnv.clientWidth;
 let displayHeight = cnv.clientHeight;
 cnv.width = displayWidth;
 cnv.height = displayHeight;
+ctx.fillStyle = background.value;
+ctx.fillRect(0, 0, cnv.width, cnv.height);
 
 document.getElementById("color").oninput = function(){
     color = this.value;
+}
+
+document.getElementById("size").oninput = function(){
+    width = this.value;
+}
+
+document.getElementById("save_image").onclick = function(){
+    let image = cnv.toDataURL("image/jpg");
+    this.href = image;
 }
 
 cnv.onmousedown = (e) => {
@@ -24,4 +36,11 @@ cnv.onmousedown = (e) => {
     cnv.onmouseup = () => {
         cnv.onmousemove = null;
     };
+}
+
+background.addEventListener('input', changeBackground);
+
+function changeBackground(){
+    bg.fillStyle = background.value;
+    bg.fillRect(0, 0, cnv.width, cnv.height);
 }
